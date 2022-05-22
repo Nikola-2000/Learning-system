@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		.container-fluid{
+			    display: flex !important;
+			    width: 100% !important;
+			    height: 780px !important;
+		}
+		#menu{
+			width: 20%;
+			background-color: white !important;
+			min-height: 100%;
+			position: fixed;
+			margin-left: 20px;
+			border-style: double;
+    		border-left: 5px;
+    		border-top: 5px;
+		}
+		#menu ul li{
+			width: 100%;
+		    padding-left: 29px;
+		    font-size: 20px;
+		}
+		a{
+			color: black !important;
+		}
+		li:not(:first-child):hover{
+			transform: scale(1.2);
+		}
+		#main_content{
+			
+			margin-left: 25%;
+    		width: 100%;
+    		margin-top: 32px;
+		}
+		img{
+			height: 280px !important;
+    width: 317px !important;
+    padding: 10px !important;
+		}
+		#main_content div{
+			    width: 74% !important;
+    margin-left: 6px !important;
+		}
+		li button{
+			background: white;
+    border-style: none;
+		}
+	</style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Home page</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+	<script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src ="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@master/dist/latest/bootstrap-autocomplete.min.js"></script>
+</head>
+<body onload="myFunction()">
+	<div class="container-fluid" >
+		<nav class ="navbar bg-light" id="menu">
+		<ul class ="nav navbar-nav" style="margin-top:0px; padding:5px">
+			<li class="nav-item" style="font-size:40px; padding-left:0px;">
+				<p>App name</p>
+			</li>
+			<li class ="nav-item" style="background-color: #f8f9fa !important">
+				
+				<button onclick="window.location.href='/course'" class ="nav-link" href="#" > <i class="bi-book-fill"></i>    Courses</button>
+			</li>
+			<li class ="nav-item">
+				<span></span>
+				<button onclick="window.location.href='/profile'" class ="nav-link" href="#"> <i class="bi-emoji-smile-fill"></i>    UserName </button>
+			</li>
+			<li class ="nav-item">
+				<span></span>
+				<button	 onclick="window.location.href='/daily'" class ="nav-link" href="#"> <i class="bi-lightbulb"></i>    Daily task </button>
+			</li>
+			<li class ="nav-item">
+				<span></span>
+				<button onclick="window.location.href='/world'" class ="nav-link" href="#"> <i class="bi-trophy-fill"></i>    World rankings </button>
+			</li>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<li class ="nav-item">
+				<span></span>
+				<a class ="nav-link" href="#"><i class="bi-box-arrow-in-right"></i>    Log out   </a>
+			</li>
+		</ul>
+		</nav>
+		<div id="main_content" >
+			<div class="input-group mb-3" style="border-style: groove; border-radius:7px; width:75%">
+				<i class="bi-search" style="margin-top: 8px; margin-left:3px"></i>
+			  <input class="form-control shadow-none basicAutoComplete" type="text" autocomplete="on" placeholder="Search courses" style="border-style: none;">
+			</div>
+			<div class="card mb-3">
+				  <img class="card-img-top" src="download.jfif" alt="Card image cap">
+				  <div class="card-body">
+				    <h5 class="card-title">Course name</h5>
+				    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+				    <button onclick="window.location.href='/course'" class="btn btn-primary">Go to course</button>
+				    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+				  </div>
+			</div>
+			<div class="card mb-3">
+				  <img class="card-img-top" src="download.jfif" alt="Card image cap">
+				  <div class="card-body">
+				    <h5 class="card-title">Course name</h5>
+				    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+				    <button onclick="window.location.href='/course'" class="btn btn-primary">Go to course</button>
+				    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+				  </div>
+			</div>
+			<div class="card mb-3">
+				  <img class="card-img-top" src="download.jfif" alt="Card image cap">
+				  <div class="card-body">
+				    <h5 class="card-title">Course name</h5>
+				    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+				    <button onclick="window.location.href='/course'" class="btn btn-primary">Go to course</button>
+				    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+				  </div>
+			</div>
+		</div>
+	</div>
+
+</body>
+<script type="text/javascript">
+	//#f8f9fa
+	//Menu
+	//Courses
+	//Profile
+	//Daily task
+	//World rankings
+	function myFunction(){
+		//alert('To activate screen reader press enter');
+		window.speechSynthesis.speak(new SpeechSynthesisUtterance('To activate screen reader press enter'));
+	}
+	$('.basicAutoComplete').autoComplete({
+    resolverSettings: {
+        url: 'https://jsonplaceholder.typicode.com/todos/1'
+    }
+	});
+	$(document).on('keypress',function(e) {
+	    if(e.which == 13) {
+	        window.speechSynthesis.speak(new SpeechSynthesisUtterance('Screen reader is active'));
+	    }
+	});
+	$("a").click(function(){
+		console.log($(this).text().trim());
+		if($(this).text().trim() == "UserName"){
+			window.location = "Profile.html";
+		}
+		else if($(this).text().trim() == "Daily task"){
+			window.location = "Daily task.html";
+		}
+		else if($(this).text().trim() == "Courses"){
+			console.log("hit");
+			window.location == "Low fidelity prototype.html";
+		}
+		else if($(this).text().trim() == "Log out"){
+			window.location == "Login register.html";
+		}
+		else{
+			alert("Page not found");
+		}
+	})
+</script>
+</html>
