@@ -2,10 +2,25 @@
 <html>
 <head>
 	<style type="text/css">
+
+.bi-emoji-smile-fill{
+			color:orangered;
+		}		
+		.bi-lightbulb{
+			color:orangered;
+		}		
+		.bi-trophy-fill{
+			color:orangered;
+		}
 		.container-fluid{
 			    display: flex !important;
 			    width: 100% !important;
 			    height: 780px !important;
+		}
+		table img{
+			border-radius: 153px;
+    width: 50%;
+    width: 33% !important;
 		}
 		#menu{
 			width: 20%;
@@ -18,7 +33,7 @@
     		border-top: 5px;
 		}
 		#menu ul li{
-			width: 100%;
+			width: 110%;
 		    padding-left: 29px;
 		    font-size: 20px;
 		}
@@ -26,7 +41,11 @@
 			color: black !important;
 		}
 		li:not(:first-child):hover{
-			transform: scale(1.2);
+			transform: scale(1.15);
+			border-style: groove;
+			border-color: gray;
+			border-radius: 6px;
+			transition: 0.5s;
 		}
 		#main_content{
 			
@@ -65,12 +84,12 @@
 	<div class="container-fluid" >
 		<nav class ="navbar bg-light" id="menu">
 		<ul class ="nav navbar-nav" style="margin-top:0px; padding:5px">
-			<li onclick="window.location.href='/home'" class="nav-item" style="font-size:40px; padding-left:0px;">
+			<li onclick="window.location.href='/home/0'" class="nav-item" style="font-size:40px; padding-left:0px;">
 				<p>App name</p>
 			</li>
 			<li class ="nav-item">
 				
-				<button onclick="window.location.href='/course'" class ="nav-link" href="#" > <i class="bi-book-fill"></i>    Courses</button>
+				<button onclick="window.location.href='/home/0'" class ="nav-link" href="#" > <i class="bi-book-fill"></i>    Courses</button>
 			</li>
 			<li class ="nav-item">
 				<span></span>
@@ -80,9 +99,9 @@
 				<span></span>
 				<button	 onclick="window.location.href='/daily'" class ="nav-link" href="#"> <i class="bi-lightbulb"></i>    Daily task </button>
 			</li>
-			<li class ="nav-item">
+			<li class ="nav-item" style="background-color: #c6ffd1  !important">
 				<span></span>
-				<button onclick="window.location.href='/world'" style="background-color: #f8f9fa !important" class ="nav-link" href="#"> <i class="bi-trophy-fill"></i>    World rankings </button>
+				<button onclick="window.location.href='/world'" style="background-color: #c6ffd1  !important" class ="nav-link" href="#"> <i class="bi-trophy-fill"></i>    World rankings </button>
 			</li>
 			<br>
 			<br>
@@ -101,7 +120,7 @@
 			<br>
 			<li class ="nav-item">
 				<span></span>
-				<a class ="nav-link" href="#"><i class="bi-box-arrow-in-right"></i>    Log out   </a>
+				<a class ="nav-link" href="/"><i class="bi-box-arrow-in-right"></i>    Log out   </a>
 			</li>
 		</ul>
 		</nav>
@@ -113,25 +132,18 @@
 			    <tr>
 			      <th scope="col"><i class="bi bi-trophy-fill"></i></th>
 			      <th scope="col" colspan="2">Username <i class="bi-emoji-smile-fill"></i></th>
-			      <th scope="col">Contributions <i class="bi-file-earmark-code-fill"></i></th>
+			      <th scope="col">Points <i class="bi-file-earmark-code-fill"></i></th>
 			    </tr>
 			  </thead>
 			  <tbody>
+				{% for user in users %}
 			    <tr>
-			      <th scope="row">1</th>
-			      <td colspan="2">Mark Baxter</td>
-			      <td>1</td>
+			      <th scope="row">{{user.id}}</th>
+			      <td colspan="2">
+				  <span>{{user.user}}</span></td>
+			      <td>{{user.world_points}}</td>
 			    </tr>
-			    <tr>
-			      <th scope="row">2</th>
-			      <td colspan="2">Jacob Thronton</td>
-			      <td>9</td>
-			    </tr>
-			    <tr>
-			      <th scope="row">3</th>
-			      <td colspan="2">Larry the Bird</td>
-			      <td>8</td>
-			    </tr>
+				{% endfor %}
 			  </tbody>
 			</table>
 		</div>

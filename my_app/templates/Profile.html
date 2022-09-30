@@ -2,6 +2,15 @@
 <html>
 <head>
 	<style type="text/css">
+		.bi-emoji-smile-fill{
+			color:orangered;
+		}		
+		.bi-lightbulb{
+			color:orangered;
+		}		
+		.bi-trophy-fill{
+			color:orangered;
+		}
 		.container-fluid{
 			    display: flex !important;
 			    width: 100% !important;
@@ -18,7 +27,7 @@
     		border-top: 5px;
 		}
 		#menu ul li{
-			width: 100%;
+			width: 110%;
 		    padding-left: 29px;
 		    font-size: 20px;
 		}
@@ -26,7 +35,11 @@
 			color: black !important;
 		}
 		#menu li:not(:first-child):hover{
-			transform: scale(1.2);
+			transform: scale(1.15);
+			border-style: groove;
+			border-color: gray;
+			border-radius: 6px;
+			transition: 0.5s;
 		}
 		#main_content{
 			
@@ -44,6 +57,7 @@
     margin-left: 6px ;
 		}
 		.friends-list{
+			top:177px;
 			float: right;
     width: 34% !important;
     margin-top: -171px;
@@ -78,16 +92,16 @@
 	<div class="container-fluid" >
 		<nav class ="navbar bg-light" id="menu">
 		<ul class ="nav navbar-nav" style="margin-top:0px; padding:5px">
-			<li onclick="window.location.href='/home'" class="nav-item" style="font-size:40px; padding-left:0px;">
+			<li onclick="window.location.href='/home/0'" class="nav-item" style="font-size:40px; padding-left:0px;">
 				<p>App name</p>
 			</li>
 			<li class ="nav-item">
 				
-				<button onclick="window.location.href='/course'" class ="nav-link" href="#" > <i class="bi-book-fill"></i>    Courses</button>
+				<button onclick="window.location.href='/home/0'" class ="nav-link" href="#" > <i class="bi-book-fill"></i>    Courses</button>
 			</li>
-			<li class ="nav-item">
+			<li class ="nav-item" style="background-color: #c6ffd1  !important">
 				<span></span>
-				<button onclick="window.location.href='/profile'" style="background-color: #f8f9fa !important" class ="nav-link" href="#"> <i class="bi-emoji-smile-fill"></i>    UserName </button>
+				<button onclick="window.location.href='/profile'" style="background-color: #c6ffd1  !important" class ="nav-link" href="#"> <i class="bi-emoji-smile-fill"></i>    UserName </button>
 			</li>
 			<li class ="nav-item">
 				<span></span>
@@ -114,17 +128,28 @@
 			<br>
 			<li class ="nav-item">
 				<span></span>
-				<a class ="nav-link" href="#"><i class="bi-box-arrow-in-right"></i>    Log out   </a>
+				<a class ="nav-link" href="/"><i class="bi-box-arrow-in-right"></i>    Log out   </a>
 			</li>
 		</ul>
 		</nav>
 		<div id="main_content" >
 			<div class="header">
-				<img src="download.jfif" style="    border-radius: 160px;
-    padding: 0px !important;">
+
+				{% if user.profile_pic == "" %}
+                {% load static %}
+                <img class="card-img-top" src="{% static 'courses/no_image_found.png' %}" style="    border-radius: 160px;
+				padding: 0px !important;" alt='No image found' >
+                {% else %}
+
+                <img src="{{user.profile_pic.url}}" style="position:absolute; top:-50px;    border-radius: 160px;
+				padding: 0px !important;" alt='No image found' >
+                {% endif %}
 				<p style="    margin-left: 50%;
-    margin-top: -165px;
-    font-size: 45px;">User name</p>
+    margin-top: 7px;
+    font-size: 45px;">{{user.user.username}}</p>
+				<p style='    margin-left: 50%;
+				margin-top: -26px;
+				font-size: 25px;'>World points: {{user.world_points}}</p>
 			</div>
 			<div class="friends-list">
 				<h1>Friends</h1>
@@ -143,33 +168,22 @@
 			<br>
 			<hr style="    margin-right: 41%;">
 			<div class="courses">
+				{% for user_course in user_courses %}
 				<div class="card mb-3">
-				  <img class="card-img-top" src="download.jfif" alt="Card image cap">
+					{% if user_course.cover_photo == "" %}
+					{% load static %}
+					<img class="card-img-top" src="{% static 'courses/no_image_found.png' %}" style="width:100% !important" alt='No image found' >
+					{% else %}
+					<img src="{{user_course.cover_photo.url}}" style='width:100% !important' alt='No image found' >
+					{% endif %}
 				  <div class="card-body">
-				    <h5 class="card-title">Course name</h5>
-				    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-				    <button onclick="window.location.href='/course'" class="btn btn-primary">Go to course</button>
-				    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+				    <h5 class="card-title">{{user_course.course_name}}</h5>
+				    <p class="card-text">{{user_course.description}}</p>
+				    <button onclick="window.location.href='/course/{{user_course.course_name}}'" style='background-color: #3aa554 !important;' class="btn btn-primary">Go to course</button>
 				  </div>
 			</div>
-			<div class="card mb-3">
-				  <img class="card-img-top" src="download.jfif" alt="Card image cap">
-				  <div class="card-body">
-				    <h5 class="card-title">Course name</h5>
-				    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-				    <button onclick="window.location.href='/course'" class="btn btn-primary">Go to course</button>
-				    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-				  </div>
-			</div>
-			<div class="card mb-3">
-				  <img class="card-img-top" src="download.jfif" alt="Card image cap">
-				  <div class="card-body">
-				    <h5 class="card-title">Course name</h5>
-				    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-				    <button onclick="window.location.href='/course'" class="btn btn-primary">Go to course</button>
-				    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-				  </div>
-			</div>
+			{% endfor %}
+
 			</div>
 			
 		</div>

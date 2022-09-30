@@ -2,6 +2,19 @@
 <html>
 <head>
 	<style type="text/css">
+
+		.bi-emoji-smile-fill{
+			color:orangered;
+		}		
+		.bi-lightbulb{
+			color:orangered;
+		}		
+		.bi-trophy-fill{
+			color:orangered;
+		}
+		.card-body button{
+			background-color: #3aa554 !important;
+		}
 		.container-fluid{
 			    display: flex !important;
 			    width: 100% !important;
@@ -18,7 +31,7 @@
     		border-top: 5px;
 		}
 		#menu ul li{
-			width: 100%;
+			width: 110%;
 		    padding-left: 29px;
 		    font-size: 20px;
 		}
@@ -26,7 +39,11 @@
 			color: black !important;
 		}
 		li:not(:first-child):hover{
-			transform: scale(1.2);
+			transform: scale(1.15);
+			border-style: groove;
+			border-color: gray;
+			border-radius: 6px;
+			transition: 0.5s;
 		}
 		#main_content{
 			
@@ -56,6 +73,17 @@
 	<script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src ="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@master/dist/latest/bootstrap-autocomplete.min.js"></script>
+	<script src=  
+	"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">  
+		</script>  
+		
+		<script src=  
+	"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js">  
+		</script>  
+		
+		<link href=  
+	"http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css"
+			rel="stylesheet" type="text/css" />
 </head>
 <body onload="myFunction()">
 	<div class="container-fluid" >
@@ -64,9 +92,9 @@
 			<li class="nav-item" style="font-size:40px; padding-left:0px;">
 				<p>App name</p>
 			</li>
-			<li class ="nav-item" style="background-color: #f8f9fa !important">
+			<li class ="nav-item" style="background-color: #c6ffd1  !important">
 				
-				<button onclick="window.location.href='/course'" class ="nav-link" href="#" > <i class="bi-book-fill"></i>    Courses</button>
+				<button onclick="window.location.href='/home/0'" style='background-color: #c6ffd1  !important' 'class ="nav-link" href="#" > <i class="bi-book-fill"></i>    Courses</button>
 			</li>
 			<li class ="nav-item">
 				<span></span>
@@ -97,42 +125,33 @@
 			<br>
 			<li class ="nav-item">
 				<span></span>
-				<a class ="nav-link" href="#"><i class="bi-box-arrow-in-right"></i>    Log out   </a>
+				<a class ="nav-link" href="/"><i class="bi-box-arrow-in-right"></i>    Log out   </a>
 			</li>
 		</ul>
 		</nav>
 		<div id="main_content" >
 			<div class="input-group mb-3" style="border-style: groove; border-radius:7px; width:75%">
 				<i class="bi-search" style="margin-top: 8px; margin-left:3px"></i>
-			  <input class="form-control shadow-none basicAutoComplete" type="text" autocomplete="on" placeholder="Search courses" style="border-style: none;">
+			  <input class="form-control shadow-none" type="text" id='autocomplete' placeholder="Search courses" style="border-style: none;">
 			</div>
+			{% for course in courses %}
 			<div class="card mb-3">
-				  <img class="card-img-top" src="download.jfif" alt="Card image cap">
+				{% if course.cover_photo == "" %}
+                {% load static %}
+                <img class="card-img-top" src="{% static 'courses/no_image_found.png' %}" style="width:100% !important" alt='No image found' >
+                {% else %}
+                <img src="{{course.cover_photo.url}}" style='width:100% !important' alt='No image found' >
+                {% endif %}
 				  <div class="card-body">
-				    <h5 class="card-title">Course name</h5>
-				    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-				    <button onclick="window.location.href='/course'" class="btn btn-primary">Go to course</button>
-				    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+				    <h5 class="card-title">{{course.course_name}}</h5>
+				    <p class="card-text">{{course.description}}</p>
+				    <button onclick="window.location.href='/course/{{course.course_name}}'" class="btn btn-primary">Go to course</button>
 				  </div>
 			</div>
-			<div class="card mb-3">
-				  <img class="card-img-top" src="download.jfif" alt="Card image cap">
-				  <div class="card-body">
-				    <h5 class="card-title">Course name</h5>
-				    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-				    <button onclick="window.location.href='/course'" class="btn btn-primary">Go to course</button>
-				    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-				  </div>
-			</div>
-			<div class="card mb-3">
-				  <img class="card-img-top" src="download.jfif" alt="Card image cap">
-				  <div class="card-body">
-				    <h5 class="card-title">Course name</h5>
-				    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-				    <button onclick="window.location.href='/course'" class="btn btn-primary">Go to course</button>
-				    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-				  </div>
-			</div>
+			{% endfor %}
+			<br>
+			<br>
+			<br>
 		</div>
 	</div>
 
@@ -148,34 +167,22 @@
 		//alert('To activate screen reader press enter');
 		window.speechSynthesis.speak(new SpeechSynthesisUtterance('To activate screen reader press enter'));
 	}
-	$('.basicAutoComplete').autoComplete({
-    resolverSettings: {
-        url: 'https://jsonplaceholder.typicode.com/todos/1'
-    }
-	});
+
+    var availableTags = [
+        {% for course in courses %}
+            "{{course.course_name}}",
+        {% endfor %}
+    ];
+
+    $( "#autocomplete" ).autocomplete({
+      source: availableTags
+    });
+
 	$(document).on('keypress',function(e) {
 	    if(e.which == 13) {
 	        window.speechSynthesis.speak(new SpeechSynthesisUtterance('Screen reader is active'));
 	    }
 	});
-	$("a").click(function(){
-		console.log($(this).text().trim());
-		if($(this).text().trim() == "UserName"){
-			window.location = "Profile.html";
-		}
-		else if($(this).text().trim() == "Daily task"){
-			window.location = "Daily task.html";
-		}
-		else if($(this).text().trim() == "Courses"){
-			console.log("hit");
-			window.location == "Low fidelity prototype.html";
-		}
-		else if($(this).text().trim() == "Log out"){
-			window.location == "Login register.html";
-		}
-		else{
-			alert("Page not found");
-		}
-	})
+
 </script>
 </html>

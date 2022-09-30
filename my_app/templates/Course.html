@@ -2,6 +2,15 @@
 <html>
 <head>
 	<style type="text/css">
+		.bi-emoji-smile-fill{
+			color:orangered;
+		}		
+		.bi-lightbulb{
+			color:orangered;
+		}		
+		.bi-trophy-fill{
+			color:orangered;
+		}
 		.container-fluid{
 			    display: flex !important;
 			    width: 100% !important;
@@ -18,7 +27,7 @@
     		border-top: 5px;
 		}
 		#menu ul li{
-			width: 100%;
+			width: 110%;
 		    padding-left: 29px;
 		    font-size: 20px;
 		}
@@ -26,7 +35,11 @@
 			color: black !important;
 		}
 		#menu li:not(:first-child):hover{
-			transform: scale(1.2);
+			transform: scale(1.15);
+			border-style: groove;
+			border-color: gray;
+			border-radius: 6px;
+			transition: 0.5s;
 		}
 		#main_content{
 			
@@ -83,13 +96,25 @@
   border: 1px solid #888;
   width: 80%;
 }
-
+hr{
+	background-color: orangered;
+    height: 3px !important;
+    width: 100% !important;
+    margin-left: 0px;
+}
 /* The Close Button */
 .close {
   color: #aaaaaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
+}
+#finish{
+	position: absolute;
+    left: 50%;
+    width: 20%;
+    height: 6%;
+	background-color: #3aa554 !important;
 }
 
 .close:hover,
@@ -117,12 +142,12 @@
 	<div class="container-fluid" >
 		<nav class ="navbar bg-light" id="menu">
 		<ul class ="nav navbar-nav" style="margin-top:0px; padding:5px">
-			<li onclick="window.location.href='/home'" class="nav-item" style="font-size:40px; padding-left:0px;">
+			<li onclick="window.location.href='/home/0'" class="nav-item" style="font-size:40px; padding-left:0px;">
 				<p>App name</p>
 			</li>
-			<li class ="nav-item">
+			<li class ="nav-item" style="background-color: #c6ffd1  !important">
 				
-				<button onclick="window.location.href='/course'" style="background-color: #f8f9fa !important" class ="nav-link" href="#" > <i class="bi-book-fill"></i>    Courses</button>
+				<button onclick="window.location.href='/home/0'" style="background-color: #c6ffd1  !important" class ="nav-link" href="#" > <i class="bi-book-fill"></i>    Courses</button>
 			</li>
 			<li class ="nav-item">
 				<span></span>
@@ -153,7 +178,7 @@
 			<br>
 			<li class ="nav-item">
 				<span></span>
-				<a class ="nav-link" href="#"><i class="bi-box-arrow-in-right"></i>    Log out   </a>
+				<a class ="nav-link" href="/"><i class="bi-box-arrow-in-right"></i>    Log out   </a>
 			</li>
 		</ul>
 		</nav>
@@ -168,22 +193,24 @@
     width: 105.66% !important;
     margin-left: -48px
 ;position: fixed;background-color: white; margin-top:-32px">
-				<h1>Course name</h1>
+				<h1>{{course.course_name}}</h1>
 			</div>
 			<br>
 			<br>
 			<br>
 			<br>
 			<br>
-			<h2>Lesson 1</h2>
+			{% for lesson in lessons %}
 			<br>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			<h2>{{lesson.titles}}</h2>
+			<br>
+			<p>{{lesson.content}}</p>
 			<br>
 			<div class="learning">
 				<h4>Heading 1</h4>
+				<hr>
 				<br>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-				<br>
+				<p>{{lesson.content}}<br>
 				<pre><code class="python">def fib(n):
   a, b = 0, 1
     while a < n:
@@ -193,24 +220,25 @@
   fib(1000)</code></pre>
 				<br>
 				<h4>Heading 2</h4>
+				<hr>
 				<br>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-				<br>
+				<p>{{lesson.content}}<br>
 				<pre><code class="python">def fib(n):
   a, b = 0, 1
     while a < n:
       print(a, end=' ')
       a, b = b, a+b
       print()
-  fib(1000)</code></pre>
+fib(1000)</code></pre>
 				<br>
 			</div>
 			<br>
+			{% endfor %}
 			<div class="test_">
 				<h2>Test</h2>
 				<br>
 				<div class="test-questions">
-					<p>1. What is machine learning?</p>
+					<p>1. {{tests.question_title}}</p>
 					<div>
       <input type="radio" id="huey" name="drone" value="huey"
              checked>
@@ -235,7 +263,9 @@
 					<iframe src="https://trinket.io/embed/python/3d8d7ce66b" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
 					<br>
 					<br>
-					<button class="btn btn-primary" id="finish" onclick="window.location.href='/home'">Finish</button>
+					<button class="btn btn-primary" id="finish" onclick="window.location.href='/home/100'">Finish</button>
+					<br>
+					<br>
 					<br>
 					<br>
 				</div>
@@ -245,9 +275,12 @@
 	<div id="myModal" class="modal">
 
 		<!-- Modal content -->
-		<div class="modal-content">
+		<div class="modal-content" style="width:50%">
 		  <span class="close">&times;</span>
+		  {% load static %}
+		  <img src="{% static 'courses/dicaprio.gif' %}" style="width:100% !important" alt='No image'>
 		  <p>You passed the test with 100% mark. Congratulations! Your certificate will be sent to your e-mail</p>
+		  <a style="text-decoration: none;color:white;" href='/home/100'><button class='btn btn-primary' style="background-color: #3aa554 !important;">Continue to home page</button></a>
 		</div>
 	  
 	  </div>
@@ -308,7 +341,7 @@
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
-	window.location.href = '/home';
+	window.location.href = '/home/100';
   }
 }
 
